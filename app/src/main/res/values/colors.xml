@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="notecolor1">#FF0000</color> <!-- Kırmızı -->
+    <color name="notecolor2">#00FF00</color> <!-- Yeşil -->
+    <color name="notecolor3">#0000FF</color> <!-- Mavi -->
+    <color name="notecolor4">#FFFF00</color> <!-- Sarı -->
+    <color name="notecolor5">#FF00FF</color> <!-- Pembe -->
+    <color name="notecolor6">#00FFFF</color> <!-- Turkuaz -->
+    <color name="notecolor7">#FFA500</color> <!-- Turuncu -->
+    <color name="notecolor8">#800080</color> <!-- Mor -->
+    <color name="notecolor9">#008000</color> <!-- Koyu Yeşil -->
+    <color name="notecolor10">#000080</color> <!-- Koyu Mavi -->
+</resources>
