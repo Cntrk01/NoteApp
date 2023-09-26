@@ -3,7 +3,6 @@ package com.movieapp.noteapp.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.movieapp.noteapp.model.Note
-
 @Dao
 interface NoteDao {
 

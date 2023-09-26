@@ -1,6 +1,5 @@
 package com.movieapp.noteapp.database
 
-import androidx.room.Entity
 import androidx.room.RoomDatabase
 import com.movieapp.noteapp.model.Note
 

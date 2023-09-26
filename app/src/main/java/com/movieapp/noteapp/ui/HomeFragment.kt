@@ -100,7 +100,6 @@ class HomeFragment : Fragment(),NoteAdapter.NoteClickListener {
                 })
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 binding.recyclerView.scrollToPosition(0)
                 if (newText !=null){
@@ -112,7 +111,6 @@ class HomeFragment : Fragment(),NoteAdapter.NoteClickListener {
             }
         })
     }
-
     override fun setOnClickListener(note: Note) {
         val nav=HomeFragmentDirections.actionHomeFragmentToDetailFragment(note)
         Navigation.findNavController(requireView()).navigate(nav)

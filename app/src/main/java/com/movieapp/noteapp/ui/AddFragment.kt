@@ -22,15 +22,9 @@ import java.util.logging.SimpleFormatter
 
 @AndroidEntryPoint
 class AddFragment : Fragment() {
-
     private var _binding : FragmentAddBinding?=null
     private val binding get() = _binding!!
     private val viewModel: NoteViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,11 +52,14 @@ class AddFragment : Fragment() {
             }else{
 
                 val date=convertLongToTime(currentTimeToLong())
-                viewModel.addNote(com.movieapp.noteapp.model.Note(null,title.toString(),note.toString(),date))
+                try {
+                    viewModel.addNote(com.movieapp.noteapp.model.Note(null,title.toString(),note.toString(),date))
+                    Toast.makeText(requireContext(),"Your Note Add Sucessfuly",Toast.LENGTH_SHORT).show()
+                }catch (e:Exception){
+                    Toast.makeText(requireContext(),"Exception",Toast.LENGTH_SHORT).show()
+                }
                 val nav=AddFragmentDirections.actionAddFragmentToHomeFragment()
                 Navigation.findNavController(requireView()).navigate(nav)
-                Toast.makeText(requireContext(),"Your Note Add Sucessfuly",Toast.LENGTH_SHORT).show()
-
             }
         }
 
@@ -72,17 +69,12 @@ class AddFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
-
     fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = SimpleDateFormat("dd.MM.yyyy HH:mm")
         return format.format(date)
     }
-
     fun currentTimeToLong(): Long {
         return System.currentTimeMillis()
     }
-
-
 }

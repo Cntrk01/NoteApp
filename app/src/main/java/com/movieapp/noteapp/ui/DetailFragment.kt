@@ -17,14 +17,13 @@ import com.movieapp.noteapp.databinding.FragmentHomeBinding
 import com.movieapp.noteapp.model.Note
 import com.movieapp.noteapp.viewmodel.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-    //var ile tanımlanmaz val olcak.Çünkü navArgs degerleri immutable(değiştirilemez) değerlerdir. var kabul etmez
     private val args : DetailFragmentArgs by navArgs()
     private var _binding : FragmentDetailBinding?=null
     private val binding get() = _binding!!
@@ -69,13 +68,16 @@ class DetailFragment : Fragment() {
     }
     private fun saveButton(){
         binding.saveButton.setOnClickListener {
-
             val title=binding.titleText.text.toString()
             val note=binding.noteText.text.toString()
             time2=convertLongToTime(currentTimeToLong())
+            try {
+                viewModel.updateNote(Note(args.detail.id,title,note,time2))
+                Toast.makeText(requireContext(),"Successfully Updated",Toast.LENGTH_SHORT).show()
+            }catch (e:Exception){
+                Toast.makeText(requireContext(),"Exception",Toast.LENGTH_SHORT).show()
+            }
 
-            viewModel.updateNote(Note(args.detail.id,title,note,time2))
-            Toast.makeText(requireContext(),"Successfully Updated",Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }
     }
@@ -85,20 +87,20 @@ class DetailFragment : Fragment() {
             builder.setTitle("Delete Message")
             builder.setMessage("Do you want to delete the note")
             builder.setPositiveButton("YES") { dialog, which ->
-                viewModel.deleteNote(args.detail)
-                Toast.makeText(requireContext(), "Remove Note Is Sucessfully", Toast.LENGTH_SHORT).show()
+               try {
+                   viewModel.deleteNote(args.detail)
+                   Toast.makeText(requireContext(), "Remove Note Is Sucessfully", Toast.LENGTH_SHORT).show()
+               }catch (e:Exception){
+                   Toast.makeText(requireContext(),"Remove Note Is Not Sucessfully",Toast.LENGTH_SHORT).show()
+               }
                 findNavController().popBackStack()
             }
-
             builder.setNegativeButton("NO") { dialog, which ->
                 Toast.makeText(requireContext(), "Note Not Remove", Toast.LENGTH_SHORT).show()
             }
-
             builder.show()
-
         }
     }
-
     private fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = SimpleDateFormat("dd.MM.yyyy HH:mm")

@@ -19,15 +19,11 @@ class NoteViewModel @Inject constructor(private var repository: NoteRepository) 
     private val allNote: LiveData<List<Note>> get() = _allNote
     var errorNote: MutableLiveData<Boolean> = MutableLiveData()
     var emptyNote: MutableLiveData<Boolean> = MutableLiveData()
-
-
     private val _searchNote = MutableLiveData<List<Note>>()
-
 
     init {
         getNoteDB()
     }
-
     private fun getNoteDB() {
         val currentNoteList = allNote.value
         if (currentNoteList.isNullOrEmpty()) {
@@ -37,22 +33,18 @@ class NoteViewModel @Inject constructor(private var repository: NoteRepository) 
             errorNote.value = false
         }
     }
-
     fun getNote() : LiveData<List<Note>>{
         return repository.getData()
     }
-
     fun addNote(note: Note) = CoroutineScope(Dispatchers.IO).launch {
         repository.insertNote(note)
     }
-
     fun deleteNote(note: Note) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteNote(note)
     }
     fun updateNote(note: Note) = CoroutineScope(Dispatchers.IO).launch {
         repository.updateNote(note)
     }
-
     fun searchNote(q: String?): LiveData<List<Note>> {
         viewModelScope.launch {
             val result = repository.searchNote(q)
